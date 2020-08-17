@@ -1,0 +1,450 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的消息</title>
+    <link href="style/index.css" type="text/css" rel="stylesheet">
+
+    <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css"/>
+    <script type="text/javascript">
+        $(function () {
+
+
+            $.ajax({
+
+                url: "user/user.do",
+                method: "POST",
+                success: function (result) {
+                    if (result.ok) {
+                        var user = result.map['user'];
+                        $('#u_money').html(user.money);
+                        $('#u_soumoney').html(user.souMoney);
+                        $('.u_phone').html(user.phone);
+                    }
+                }
+            })
+        })
+
+        function c_baocun() {
+            var money = $("#c_money").val() * 1;
+            var fin_money = $('#u_money').html() * 1 + money;
+            $.ajax({
+                url: "user/chongzhi.do",
+                data: "money=" + fin_money,
+                method: "POST",
+                success: function (result) {
+                    if (result.ok) {
+                        $('#u_money').html(fin_money.toFixed(2));
+
+                    }
+
+                }
+
+
+            })
+
+
+        }
+
+        function z_baocun() {
+
+            var money = $('#z_money').val() * 1
+            var phone = $('#z_phone').val();
+            var fin_money = $('#u_money').html() * 1;
+            if (money > fin_money) {
+                alert('余额不足，请充值');
+                return;
+            }
+            $.ajax({
+                url: "user/bring.do",
+                data: "money=" + money + "&phone=" + phone,
+                method: "POST",
+                success: function (result) {
+                    if (result.ok) {
+                        $('#u_money').html(fin_money - money);
+                        alert('转账成功！');
+                    } else if (result.msg == "1") {
+                        alert("余额不足，请充值");
+                    } else if (result.msg == "2") {
+                        alert("查无此人");
+                    }
+
+                }
+            })
+
+
+        }
+
+        function t_baocun() {
+            var sou_money = $('#t_money').val() * 1;
+            var password = $('#t_password').val();
+            var fin_money = $('#u_money').html() * 1;
+            var reg = /^[0-9]*$/;
+            if (!reg.test(sou_money)) {
+                alert("只支持整数充值");
+                return;
+            }
+            if ((sou_money * 2) > fin_money) {
+                alert('余额不足，请充值');
+                return;
+            }
+            $.ajax({
+
+                url: "user/invest.do",
+                data: "money=" + sou_money * 2 + "&password=" + password,
+                method: "POST",
+                success: function (result) {
+                    if (result.ok) {
+                        $('#u_soumoney').html($('#u_soumoney').html() * 1 + sou_money);
+                        $('#u_money').html(fin_money - (sou_money * 2));
+                        alert("充值成功");
+                    } else if (result.msg == "1") {
+                        alert("密码错误");
+                    } else if (result.msg == "2") {
+                        alert("余额不足");
+                    }
+
+                }
+
+
+            })
+
+
+        }
+
+
+    </script>
+</head>
+
+<body>
+<div class="head">
+    <div class="logobox">
+        <a href="" class="logo"><img src=""></a>
+        <a href="">哈尔滨</a>
+    </div>
+    <div class="nav">
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="login.html">加入我们</a></li>
+            <li><a href="sendorder.html">寄件</a></li>
+            <li><a href="shop.html">商城</a></li>
+            <li><a href="personaldata.html" class="current">个人中心</a></li>
+            <li><a href="gywm.html">关于我们</a></li>
+            <li><a href="psy.html">配送员加盟</a></li>
+            <li><a href="lxwm.html">联系我们</a></li>
+            <li><a href="xz.html">手机兔飕飕</a></li>
+        </ul>
+    </div>
+</div>
+<div class="person">
+    <div class="person-center">
+        <div class="person-image">
+            <div><img src="images/tx.png"></div>
+            <p class="u_phone"></p>
+        </div>
+        <div class="person-text">
+            <div class="text1">
+                <p>基本信息</p>
+                <p class="u_phone"></p>
+                <p>安全设置</p>
+            </div>
+            <div class="text2">
+                <div class="progressbox">
+                    <div class="progresstext">资料完成度<span id="total"></span></div>
+                    <div class="progress">
+                        <div id="bar" style="width:0%"></div>
+                    </div>
+                </div>
+                <a href="personaldata.html">我要完善</a>
+            </div>
+
+        </div>
+        <div class="person-yuan">
+            <ul>
+                <li><a href="personalmoney.html"><img src="images/p4.png">
+                    <p>我的钱包</p></a></li>
+                <li><a href="personalcollect.html"><img src="images/p5.png">
+                    <p>我的收藏</p></a></li>
+                <li><a href="personalnews.html"><img src="images/p6.png">
+                    <p>我的消息</p></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="leftnav">
+        <ul>
+            <li><a onClick="window.location.href='personaldata.html'">基本信息</a></li>
+            <li><a onClick="window.location.href='personalorder.html'">我的订单</a></li>
+            <li><a onClick="window.location.href='personalmoney.html'" class="current">我的钱包</a></li>
+            <li><a onClick="window.location.href='personaladdress.html'">地址管理</a></li>
+            <li><a onClick="window.location.href='personalservice.html'">我的客服</a></li>
+            <li><a onClick="window.location.href='personalcollect.html'">我的收藏</a></li>
+            <li><a onClick="window.location.href='personalyao.html'">邀请好友</a></li>
+            <li><a onClick="window.location.href='personalnews.html'">消息中心</a></li>
+            <li><a onClick="window.location.href='personalfap.html'">我的发票</a></li>
+            <li>
+                <a href="">我的店铺</a>
+                <div>
+                    <a href="">店铺设置</a>
+                    <a onClick="window.location.href='personalshop2.html'">商品管理</a>
+                    <a onClick="window.location.href='personalshop3.html'">订单管理</a>
+                </div>
+            </li>
+            <li><a href="">联系方式</a></li>
+        </ul>
+    </div>
+    <div class="moneybox">
+        <div class="yu">
+            <div>
+                <h1 id="u_money"></h1>
+                <p>当前余额</p>
+            </div>
+            <a></a>
+            <div>
+                <h1 id="u_soumoney"></h1>
+                <p>飕飕币余额</p>
+            </div>
+            <a></a>
+            <div>
+                <h1>51%</h1>
+                <p>今日搜搜币兑换比率</p>
+            </div>
+            <input type="button" value="充值" class="bb">
+        </div>
+        <div class="date">
+            <a class="current">天</a>
+            <a>周</a>
+            <a style="border-right:1px solid #e6e6e6">月</a>
+        </div>
+        <div id="container" style="max-width:800px;height:400px; margin:50px auto;"></div>
+        <div class="databtn">
+            <input type="button" value="充值飕飕币" class="cc">
+            <input type="button" value="转让" class="dd">
+        </div>
+
+
+    </div>
+</div>
+<div class="foot_box" style="margin-top:0;">
+    <div class="foot">
+        <div class="foot_tel">
+            <h1>198-4519-8752</h1>
+            <h2>客服热线（9:00-18:00）</h2>
+            <p>工作日：9:00-19:00<br>非工作日9:00-18:00</p>
+        </div>
+        <div class="foot_nav">
+            <ul>
+                <li><a href="">首页</a></li>
+                <li><a href="">寄件</a></li>
+                <li><a href="">商城</a></li>
+            </ul>
+            <ul>
+                <li><a href="">个人中心</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">商家入驻</a></li>
+            </ul>
+            <ul>
+
+                <li><a href="">配送员加盟</a></li>
+                <li><a href="">手机兔飕飕</a></li>
+            </ul>
+        </div>
+        <div class="foot_wei">
+            <div>
+                <p>配送端下载</p>
+                <img src="images/erwei.png">
+            </div>
+            <div>
+                <p>客户端下载</p>
+                <img src="images/erwei.png">
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹窗-->
+<div class="pop2">
+    <div class="poptitle">
+        <h1>充值</h1>
+        <a class="close">×</a>
+    </div>
+
+    <div>
+        <label style="margin-left:13px;">充值金额</label>
+        <input type="text" id="c_money" class="primary" placeholder="请输入充值金额">
+        <span>元</span>
+    </div>
+    <div>
+        <label style="margin-left:13px;">支付方式</label>
+        <ul>
+            <li class="sousou">
+                <img src="images/ss__03.png">
+                <a class="ss">微信支付</a>
+                <a class="dian"></a>
+                <a class="dian2"></a>
+            </li>
+            <li class="sousou">
+                <img src="images/ss__06.png">
+                <a class="ss">支付宝支付</a>
+                <a class="dian"></a>
+                <a class="dian2"></a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <button onclick="c_baocun()" class="baocun">保存</button>
+    </div>
+</div>
+<div class="pop">
+    <div class="poptitle">
+        <h1>充值飕飕币 :两元人民币可兑换一枚飕飕币</h1>
+        <a class="close">×</a>
+    </div>
+    <div>
+        <label style="margin-left:13px;">充值飕飕币</label>
+        <input type="text" class="primary" id="t_money" placeholder="请输入充值个数">
+        <span>个</span>
+    </div>
+    <div>
+        <label style="margin-left:13px;">账号密码</label>
+        <input type="text" id="t_password" class="primary" placeholder="请输入账号密码">
+    </div>
+    <div><input type="submit" value="保存" onclick="t_baocun()" class="baocun"></div>
+</div>
+<div class="pop3">
+    <div class="poptitle">
+        <h1>转账</h1>
+        <a class="close">×</a>
+    </div>
+
+    <div>
+        <label style="margin-left:13px;">转账</label>
+        <input type="text" class="primary" data-container="body" data-toggle="popover" data-placement="left"
+               id="z_money" placeholder="请输入转账金额">
+        <span>元</span>
+    </div>
+
+    <div>
+        <label style="margin-left:13px;">转让手机号</label>
+        <input type="text" class="primary" id="z_phone" placeholder="请输入手机号">
+
+    </div>
+
+    <div>
+        <input type="submit" value="保存" onclick="z_baocun()" class="baocun">
+    </div>
+
+</div>
+
+<div class="pop-mask"></div>
+<script>
+    $(document).ready(function (e) {
+
+
+        var chart = Highcharts.chart('container', {
+            title: {
+                text: '余额情况'
+
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: ['10日', '11日', '12日', '13日', '14日', '15日', '16日', '17日'],
+                labels: {
+                    style: {
+                        color: '#000'
+                    }
+                }
+            },
+            yAxis: [{
+
+                title: {
+                    text: '余额'
+                }, plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }],
+                labels: {
+                    style: {
+                        color: '#blue'
+                    }
+                }
+            }],
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+            plotOptions: {
+                series: {
+                    label: {
+                        connectorAllowed: false
+                    },
+                    pointStart: 1
+                }
+            },
+            series: [
+
+
+                {
+                    name: '余额',
+                    data: [24916, 24064, 59742, 29851, 32490, 60282]
+                }
+
+            ],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+        })
+
+        $(".date a").click(function () {
+            $(this).addClass("current").siblings().removeClass("current")
+        })
+//选择切换样式
+        $(".dian2").hide()
+        $(".sousou").click(function () {
+            $(".dian2").hide()
+            $(this).children(".dian2").show();
+            $(this).addClass("oncurrent").siblings("li").removeClass("oncurrent")
+        })
+        $(".tebox .te span").hide()
+        $(".tebox .te").toggle(function () {
+            $(this).addClass("current");
+            $(this).children("span").show();
+        }, function () {
+            $(this).removeClass("current");
+            $(this).children("span").hide();
+        })
+        //选择框
+        $(".shijian").hide()
+        $(".xuanze").click(function () {
+            var text = $(this).find("option:selected").text();
+            if (text == "立即送出") {
+                $(".shijian").hide()
+            } else {
+                $(".shijian").show()
+            }
+        })
+
+    });
+</script>
+</body>
+</html>

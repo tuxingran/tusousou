@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.hrb.tusousou.dao.OrderDao">
+    <resultMap id="OrderMap" type="com.oracle.hrb.tusousou.pojo.Order">
+        <id column="o_id" property="id"></id>
+        <result column="o_num" property="num"></result>
+        <result column="o_date" property="date"></result>
+        <result column="o_goods" property="goods"></result>
+        <result column="o_weight" property="weight"></result>
+        <result column="o_price" property="price"></result>
+        <result column="o_state" property="state"></result>
+        <association property="sender" column="o_sender" javaType="com.oracle.hrb.tusousou.pojo.User"
+                     select="com.oracle.hrb.tusousou.dao.UserDao.findById">
+        </association>
+        <association property="to" column="o_to" javaType="com.oracle.hrb.tusousou.pojo.User"
+                     select="com.oracle.hrb.tusousou.dao.UserDao.findById">
+        </association>
+        <association property="senderAddress" column="o_sender_address" javaType="com.oracle.hrb.tusousou.pojo.Address"
+                     select="com.oracle.hrb.tusousou.dao.AddressDao.findById">
+        </association>
+        <association property="toAddress" column="o_to_address" javaType="com.oracle.hrb.tusousou.pojo.Address"
+                     select="com.oracle.hrb.tusousou.dao.AddressDao.findById">
+        </association>
+
+    </resultMap>
+    <select id="findByUserId" resultMap="OrderMap">
+        select * from dingdan  where o_sender = #{id}
+    </select>
+
+    <update id="accept">
+        update dingdan set o_state = '订单已完成' where o_id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from dingdan where o_id = #{id};
+    </delete>
+
+    <insert id="add">
+        insert into dingdan (o_num,o_date,o_goods,o_weight,o_price,o_sender,o_to,o_sender_address,o_to_address) values (#{num},#{date},#{goods},#{weight},#{price},#{sender.id},#{to.id},#{senderAddress.id},#{toAddress.id})
+    </insert>
+</mapper>

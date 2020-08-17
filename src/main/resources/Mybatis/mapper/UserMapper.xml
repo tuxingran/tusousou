@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.hrb.tusousou.dao.UserDao">
+    <resultMap id="UserMap" type="com.oracle.hrb.tusousou.pojo.User">
+        <id column="u_id" property="id"></id>
+        <result column="u_name" property="name"></result>
+        <result column="u_password" property="password"></result>
+        <result column="u_email" property="e_mail"></result>
+        <result column="u_phone" property="phone"></result>
+        <result column="u_money" property="money"></result>
+        <result column="u_soumoney" property="souMoney"></result>
+        <result column="u_touxiang" property="touxiang"></result>
+        <result column="u_sex" property="sex"></result>
+        <result column="u_date" property="date"></result>
+    </resultMap>
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into user (u_password,u_email,u_phone)values(#{password},#{e_mail},#{phone})
+    </insert>
+    <select id="findByPhone" resultMap="UserMap">
+        select * from user where u_phone = #{phone}
+    </select>
+    <select id="findByEmail" resultMap="UserMap">
+        select * from user where u_email = #{e_mail}
+    </select>
+    <select id="findById" resultMap="UserMap">
+        select * from user where u_id = #{id}
+    </select>
+    <update id="update">
+        update user
+        <set>
+            <if test="name!=null">
+                u_name=#{name},
+            </if>
+            <if test="sex!=null">
+                u_sex=#{sex},
+            </if>
+            <if test="password!=null">
+                u_password=#{password},
+            </if>
+            <if test="e_mail!=null">
+                u_email=#{e_mail},
+            </if>
+            <if test="phone!=null">
+                u_phone=#{phone},
+            </if>
+            <if test="money!=0.0">
+                u_money=#{money},
+            </if>
+            <if test="souMoney!=0">
+                u_soumoney=#{souMoney},
+            </if>
+            <if test="date!=null">
+                u_date=#{date},
+            </if>
+            <if test="touxiang!=null">
+                u_touxiang=#{touxiang},
+            </if>
+        </set>
+        where u_id = #{id}
+    </update>
+</mapper>

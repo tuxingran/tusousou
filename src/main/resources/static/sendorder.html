@@ -1,0 +1,245 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <link href="style/index2.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-1.8.2.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css"/>
+    <script type="text/javascript">
+        $(function () {
+
+            var url = "order/getUserAndAddress.do";
+            $.ajax({
+                url: url,
+                method: "POST",
+                success: function (result) {
+                    if (result.ok) {
+                        var user = result.map['user'];
+                        var addresses = result.map['addresses'];
+                        $('#s_name').val(user.name);
+                        $('#s_phone').val(user.phone);
+                        for (var i = 0; i < addresses.length; i++) {
+                            var address = addresses[i];
+                            $('#s_address').append('<option value = "' + address.id + '">地址' + (i + 1) + '</option>');
+                        }
+
+
+                    }
+
+                }
+
+
+            })
+
+        })
+
+        function getto() {
+            var url = "order/getUserByPhone.do";
+            var phone = $('#t_phone').val();
+            $.ajax({
+                url: url,
+                data: "phone=" + phone,
+                method: "POST",
+                success: function (result) {
+                    if (result.ok) {
+                        var user = result.map['user'];
+                        var addresses = result.map['addresses'];
+                        $('#t_name').val(user.name);
+                        $('#t_phone').val(user.phone);
+                        for (var i = 0; i < addresses.length; i++) {
+                            var address = addresses[i];
+                            $('#t_address').append('<option value = "' + address.id + '">地址' + (i + 1) + '</option>');
+                        }
+                    } else {
+                        $('#t_phone').attr('data-content', '此电话还没有被注册');
+                        $("#t_phone").popover('show');
+                    }
+
+                }
+
+
+            })
+
+        }
+
+        function tiaozhuan() {
+            var sendAddress = $('#s_address').val();
+            var t_phone = $('#t_phone').val();
+            var t_weight = $('#t_weight').val();
+            var t_address = $('#t_address').val();
+            var price = t_weight * 120;
+            var goods = $('#t_goods').val();
+            var data = "sendAddress=" + sendAddress + "&weight=" + t_weight + "&t_phone=" + t_phone + "&t_weigth=" + t_weight + "&t_address=" + t_address + "&price=" + price + "&goods=" + goods;
+            var url = "sendorder2.html";
+            sessionStorage.setItem('data', data);
+            sessionStorage.setItem('price', price);
+            window.location = "sendorder2.html";
+
+
+        }
+    </script>
+</head>
+
+<body>
+<div class="headbox">
+    <div class="head">
+        <div class="logobox">
+            <a href="" class="logo"><img src=""></a>
+            <a href="">哈尔滨</a>
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="login.html">加入我们</a></li>
+                <li><a href="sendorder.html" class="current">寄件</a></li>
+                <li><a href="shop.html">商城</a></li>
+                <li><a href="personaldata.html">个人中心</a></li>
+                <li><a href="gywm.html">关于我们</a></li>
+                <li><a href="psy.html">配送员加盟</a></li>
+                <li><a href="lxwm.html">联系我们</a></li>
+                <li><a href="xz.html">手机兔飕飕</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="leftnav">
+        <ul>
+            <li><a onclick="window.location.href='sendorder.html'" class="current">在线下单</a></li>
+            <li><a onclick="window.location.href='sendorderprice.html'">价格表</a></li>
+            <li>
+                <a onClick="window.location.href='personaladdress.html'">地址簿</a>
+            </li>
+            <li><a onclick="window.location.href='sendorderaddress.html'">我的寄件</a></li>
+        </ul>
+    </div>
+    <div class="xdbox">
+        <div class="send">
+            <h1>寄件信息</h1>
+            <form>
+                <div>
+                    <label class="labeltext">寄件地址</label>
+                    <select id="s_address" class="seltext">
+
+
+                    </select>
+                    <div class="xinzeng" id="an" style=" display:inline-block; margin-top:33px;">新增收货地址</div>
+                </div>
+                <div>
+                    <label class="labeltext">联系人姓名</label>
+                    <input type="text" id="s_name" placeholder="请输入联系人姓名" class="inputtext">
+                </div>
+                <div>
+                    <label class="labeltext">手机号码</label>
+                    <input type="text" id="s_phone" placeholder="请输入手机号" class="inputtext">
+                </div>
+
+
+        </div>
+        <div class="send">
+            <h1>收件信息</h1>
+
+            <div>
+                <label class="labeltext">寄件地址</label>
+                <select id="t_address" class="seltext">
+
+                </select>
+                <div class="xinzeng" id="an" style=" display:inline-block; margin-top:33px;">新增收货地址</div>
+            </div>
+            <div>
+                <label class="labeltext">联系人姓名</label>
+                <input type="text" id="t_name" placeholder="请输入联系人姓名" class="inputtext">
+            </div>
+            <div>
+                <label class="labeltext">手机号码</label>
+                <input type="text" onblur="getto()" data-container="body" data-toggle="popover" data-placement="right"
+                       id="t_phone"
+                       placeholder="请输入手机号" class="inputtext">
+            </div>
+
+
+        </div>
+        <div class="send">
+            <h1>物品信息</h1>
+
+            <div>
+                <label class="labeltext">重量</label>
+                <span id="min">-</span><input id="t_weight" type="text" class="zl" value="1" id="num"><span
+                    id="add">+</span><a
+                    class="kg">kg</a>
+            </div>
+
+            <div>
+                <label class="labeltext">寄件地址</label>
+                <input placeholder="物品信息" id="t_goods" data-container="body" data-toggle="popover"
+                       data-placement="right"/>
+            </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<div class="nextbox">
+    <a class="next" onclick="tiaozhuan()">下一步</a>
+</div>
+<div class="foot_box">
+    <div class="foot">
+        <div class="foot_tel">
+            <h1>198-4519-8752</h1>
+            <h2>客服热线（9:00-18:00）</h2>
+            <p>工作日：9:00-19:00<br>非工作日9:00-18:00</p>
+        </div>
+        <div class="foot_nav">
+            <ul>
+                <li><a href="">首页</a></li>
+                <li><a href="">寄件</a></li>
+                <li><a href="">商城</a></li>
+            </ul>
+            <ul>
+                <li><a href="">个人中心</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">商家入驻</a></li>
+            </ul>
+            <ul>
+
+                <li><a href="">配送员加盟</a></li>
+                <li><a href="">手机兔飕飕</a></li>
+            </ul>
+        </div>
+        <div class="foot_wei">
+            <div>
+                <p>配送端下载</p>
+                <img src="images/erwei.png">
+            </div>
+            <div>
+                <p>客户端下载</p>
+                <img src="images/erwei.png">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var num = 0;
+        $("#add").click(function () {
+            num = parseInt($(this).siblings(".zl").val())
+            num++
+            $(this).siblings(".zl").val(num)
+        })
+        $("#min").click(function () {
+            num = parseInt($(this).siblings(".zl").val())
+            if (num > 0) {
+                num--
+            }
+
+            $(this).siblings(".zl").val(num)
+        })
+
+
+    })
+</script>
+</body>
+</html>

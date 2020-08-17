@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.hrb.tusousou.dao.NewsDao">
+    <resultMap id="NewsMap" type="com.oracle.hrb.tusousou.pojo.News">
+        <id column="n_id" property="id"></id>
+        <result column="n_date" property="date"></result>
+        <result column="n_state" property="state"></result>
+        <association property="newsType" column="n_newsType" javaType="com.oracle.hrb.tusousou.pojo.NewsType"
+                     select="com.oracle.hrb.tusousou.dao.NewsTypeDao.findById">
+        </association>
+        <association property="user" column="n_user" javaType="com.oracle.hrb.tusousou.pojo.User"
+                     select="com.oracle.hrb.tusousou.dao.UserDao.findById">
+        </association>
+    </resultMap>
+
+    <select id="findByUserId" resultMap="NewsMap">
+        select * from news where n_user = #{id}
+    </select>
+
+    <insert id="add">
+        insert into news (n_date,n_newsType,n_user) values(#{date},#{newsType.id},#{user.id})
+    </insert>
+
+    <update id="update">
+        update news set n_state = '已读' where n_id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from news where n_id = #{id}
+    </delete>
+
+
+</mapper>

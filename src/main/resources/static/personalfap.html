@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的消息</title>
+    <link href="style/index.css" type="text/css" rel="stylesheet">
+
+    <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $.ajax({
+                url: "user/user.do",
+                method: "POST",
+                success: function (result) {
+                    if (result.ok) {
+                        var user = result.map['user'];
+                        $('.us_phone').html(user.phone);
+                    }
+                }
+            })
+
+        })
+
+    </script>
+</head>
+
+<body>
+<div class="head">
+    <div class="logobox">
+        <a href="" class="logo"><img src=""></a>
+        <a href="">哈尔滨</a>
+    </div>
+    <div class="nav">
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="login.html">加入我们</a></li>
+            <li><a href="sendorder.html">寄件</a></li>
+            <li><a href="shop.html">商城</a></li>
+            <li><a href="personaldata.html" class="current">个人中心</a></li>
+            <li><a href="gywm.html">关于我们</a></li>
+            <li><a href="psy.html">配送员加盟</a></li>
+            <li><a href="lxwm.html">联系我们</a></li>
+            <li><a href="xz.html">手机兔飕飕</a></li>
+        </ul>
+    </div>
+</div>
+<div class="person">
+    <div class="person-center">
+        <div class="person-image">
+            <div><img src="images/tx.png"></div>
+            <p class="us_phone">182****7726</p>
+        </div>
+        <div class="person-text">
+            <div class="text1">
+                <p>基本信息</p>
+                <p class="us_phone">182****7726</p>
+                <p>安全设置</p>
+            </div>
+            <div class="text2">
+                <div class="progressbox">
+                    <div class="progresstext">资料完成度<span id="total"></span></div>
+                    <div class="progress">
+                        <div id="bar" style="width:0%"></div>
+                    </div>
+                </div>
+                <a href="">我要完善</a>
+            </div>
+
+        </div>
+        <div class="person-yuan">
+            <ul>
+                <li><a href=""><img src="images/p4.png">
+                    <p>我的钱包</p></a></li>
+                <li><a href=""><img src="images/p5.png">
+                    <p>我的收藏</p></a></li>
+                <li><a href=""><img src="images/p6.png">
+                    <p>我的消息</p></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="leftnav">
+        <ul>
+            <li><a onClick="window.location.href='personaldata.html'">基本信息</a></li>
+            <li><a onClick="window.location.href='personalorder.html'">我的订单</a></li>
+            <li><a onClick="window.location.href='personalmoney.html'">我的钱包</a></li>
+            <li><a onClick="window.location.href='personaladdress.html'">地址管理</a></li>
+            <li><a onClick="window.location.href='personalservice.html'">我的客服</a></li>
+            <li><a onClick="window.location.href='personalcollect.html'">我的收藏</a></li>
+            <li><a onClick="window.location.href='personalyao.html'">邀请好友</a></li>
+            <li><a onClick="window.location.href='personalnews.html'">消息中心</a></li>
+            <li><a onClick="window.location.href='personalfap.html'" class="current">我的发票</a></li>
+            <li>
+                <a href="">我的店铺</a>
+                <div>
+                    <a href="">店铺设置</a>
+                    <a onClick="window.location.href='personalshop2.html'">商品管理</a>
+                    <a onClick="window.location.href='personalshop3.html'">订单管理</a>
+                </div>
+            </li>
+            <li><a href="">联系方式</a></li>
+        </ul>
+    </div>
+
+    <div class="fabox">
+        <h1>发票详情</h1>
+        <h2><span>可开发票总金额</span>￥89</h2>
+        <p class="pp">订单编号 选择订单（0）</p>
+        <div class="faform">
+            <form>
+                <div>
+                    <label>抬头</label>
+                    <input type="text" placeholder="请输入发票抬头" class="primary2">
+                </div>
+                <div>
+                    <label>税号</label>
+                    <input type="text" placeholder="请输入发票税号" class="primary2">
+                </div>
+                <div>
+                    <label>内容</label>
+                    <textarea placeholder="请输入发票内容"></textarea>
+                </div>
+                <div>
+                    <label>金额</label>
+                    <input type="text" readonly class="primary2 pr" value="#57">
+                </div>
+                <div>
+                    <input type="submit" value="提交" class="sub">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="pop-mask"></div>
+<div class="pop3">
+    <div class="poptitle">
+        <h1>选择订单</h1>
+        <a class="close">×</a>
+    </div>
+    <table style="margin:20px auto;">
+        <tr align="center" height="30">
+            <th width="60" align="left"><input type="checkbox">全选
+            </td>
+            <th>订单编号
+            </td>
+            <th width="100">配送费
+            </td>
+            <th width="200">下单时间
+            </td>
+        </tr>
+        <tr align="center" height="30">
+            <td width="60" align="left"><input type="checkbox"></td>
+            <td>abcdefg12234erfgtyysdefdreee</td>
+            <td width="100">11.00</td>
+            <td width="200">07:00:00</td>
+        </tr>
+        <tr align="center" height="30">
+            <td width="60" align="left"><input type="checkbox"></td>
+            <td>abcdefg12234erfgtyysdefdreee</td>
+            <td width="100">11.00</td>
+            <td width="200">07:00:00</td>
+        </tr>
+        <tr align="center" height="30">
+            <td width="60" align="left"><input type="checkbox"></td>
+            <td>abcdefg12234erfgtyysdefdreee</td>
+            <td width="100">11.00</td>
+            <td width="200">07:00:00</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

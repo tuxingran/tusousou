@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link href="style/zhanshi.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<script src="js/jquery.js"></script>
+<script>
+$(document).ready(function(e) {
+    $(".nav2").hide();
+	$(".san").toggle(function(){
+		$(".nav2").show()	
+	},function(){
+		$(".nav2").hide()	
+	})
+});
+</script>
+</head>
+
+<body>
+<div class="head">
+	<div class="logobox">
+		<a href="" class="logo"><img src=""></a>
+    	<select class="chengshi">
+        	<option>哈尔滨</option>
+            <option>大连</option>
+            <option>佳木斯</option>
+        </select>
+    </div>
+    <div class="nav">
+    	<ul>
+        	<li><a href="index.html" >首页</a></li>
+            <li><a href="login.html">加入我们</a></li>
+            <li><a href="sendorder.html">寄件</a></li>
+            <li><a href="shop.html">商城</a></li>
+            <li><a href="personaldata.html" >个人中心</a></li>
+            <li><a href="gywm.html">关于我们</a></li>
+            <li><a href="psy.html">配送员加盟</a></li>
+            <li><a href="lxwm.html" class="current">联系我们</a></li>
+            <li><a href="xz.html">手机兔飕飕</a></li>
+        </ul>
+    </div>
+    <!--<span class="san"></span>-->
+    <!--<div class="nav2">
+    	<ul>
+        	<li><a href="">首页</a></li>
+            <li><a href="sendorder.html">寄件</a></li>
+            <li><a href="shop.html">商城</a></li>
+            <li><a href="personaldata.html" >个人中心</a></li>
+            <li><a href="">关于我们</a></li>
+            <li><a href="">商家入驻</a></li>
+            <li><a href="">配送员加盟</a></li>
+            <li><a href="">联系我们</a></li>
+            <li><a href="">手机兔飕飕</a></li>
+        </ul>
+    </div>-->
+</div>
+<div class="gybanner">
+	
+</div>
+<div class="lxwm">
+	<div class="xdt">
+    	<iframe src="ditu.html" scrolling="no" frameborder="0" width="530" height="300"></iframe>
+    </div>
+    <div class="dizhi">
+    	<p>公司网址:www.tusousou.com</p>
+        <p>联系电话:0451-8630-3002</p>
+        <p>公司传真:12345678</p>
+        <p>邮政编码:100014</p>
+        <p>黑龙江省哈尔滨市香坊区红旗大街178号</p>
+    </div>
+</div>
+
+
+<div class="foot_box" style=" margin-top:100px;">
+	<div class="foot">
+    	<div class="foot_tel">
+        	<h1>400-668-5668</h1>
+            <h2>客服热线（9:00-18:00）</h2>
+            <p>工作日：9:00-19:00<br>非工作日9:00-18:00</p>
+        </div>
+        <div class="foot_nav">
+        	<ul>
+            	<li><a href="">首页</a></li>
+                <li><a href="">寄件</a></li>
+                <li><a href="">商城</a></li>
+            </ul>
+            <ul>
+            	<li><a href="">个人中心</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">商家入驻</a></li>
+            </ul>
+            <ul>
+            	
+                <li><a href="">配送员加盟</a></li>
+                <li><a href="">手机兔飕飕</a></li>
+            </ul>
+        </div>
+        <div class="foot_wei">
+        	<div>
+            	<p>配送端下载</p>
+                <img src="images/erwei.png">
+            </div>
+            <div>
+            	<p>客户端下载</p>
+                <img src="images/erwei.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(e) {
+    $(".text").hide().eq(0).show();
+	$(".contentext li").mouseenter(function(){
+		var index=$(this).index();
+		 $(".text").hide().eq(index).show();
+		 $(this).addClass("current").siblings().removeClass("current")	
+	})
+
+	
+});
+</script>
+</body>
+</html>

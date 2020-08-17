@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <link href="style/index2.css" type="text/css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/registe.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css"/>
+    <script src="js/cookie.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            $(".nav2").hide();
+            $(".san").toggle(function () {
+                $(".nav2").show()
+            }, function () {
+                $(".nav2").hide()
+            })
+
+            var isShow = true;
+
+            function change() {
+
+                var v = document.getElementById("ps");
+                if (isShow) {
+                    v.type = "text";
+                    isShow = false;
+                } else {
+                    v.type = "password";
+                    isShow = true;
+                }
+            };
+
+            $(".yanjing").click(function () {
+                change()
+            })
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+
+
+            var phone = getCookie('phone');
+            $("#userPhone").val(phone);
+            var password = getCookie('password');
+            $("#userPassword").val(password);
+            $("#remeberMe").attr("checked", "checked");
+
+
+        })
+    </script>
+    <style>
+        .passlog .yanjing {
+            position: absolute;
+            display: block;
+            width: 16px;
+            height: 11px;
+            background-image: url(images/xianshi.png);
+            right: 5px;
+            top: 50%;
+            margin-top: -6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+<div class="headbox">
+    <div class="head">
+        <div class="logobox">
+            <a href="" class="logo"><img src=""></a>
+            <select class="chengshi">
+                <option>哈尔滨</option>
+                <option>大连</option>
+                <option>佳木斯</option>
+            </select>
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="login.html" class="current">加入我们</a></li>
+                <li><a href="sendorder.html">寄件</a></li>
+                <li><a href="shop.html">商城</a></li>
+                <li><a href="personaldata.html">个人中心</a></li>
+                <li><a href="gywm.html">关于我们</a></li>
+                <li><a href="psy.html">配送员加盟</a></li>
+                <li><a href="lxwm.html">联系我们</a></li>
+                <li><a href="xz.html">手机兔飕飕</a></li>
+            </ul>
+        </div>
+        <span class="san"></span>
+        <div class="nav2">
+            <ul>
+                <li><a href="">首页</a></li>
+                <li><a href="sendorder.html">寄件</a></li>
+                <li><a href="shop.html">商城</a></li>
+                <li><a href="personaldata.html">个人中心</a></li>
+                <li><a href="">关于我们</a></li>
+                <li><a href="">商家入驻</a></li>
+                <li><a href="">配送员加盟</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">手机兔飕飕</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="loginbox">
+        <div class="login">
+            <img src="images/login_03.png" class="logimg">
+            <div class="log">
+                <ol>
+                    <li class="current">密码登录 <span>
+                </ol>
+                <div class="passlog">
+                    <div class="inputbox">
+                        <input type="text" data-container="body" data-toggle="popover" data-placement="left"
+                               placeholder="请输入手机号码" id="userPhone" class="control"></div>
+                    <div class="inputbox" style="position:relative;">
+                        <input type="password" placeholder="请输入登录密码号码" id="userPassword" class="control" id="ps">
+                        <span class="yanjing"></span>
+                    </div>
+                    <div class="inputbox">
+                        <input type="checkbox" id="remeberMe" class="check"><span class="rem">记住我</span>
+                        <a href="" class="forget">忘记密码</a>
+                    </div>
+                    <div class="inputbox">
+                        <button onclick="u_login()" class="deng">登陆</button>
+                    </div>
+                    <a href="registe.html" class="zhuce">没有账号？立即注册</a>
+                    <div class="inputbox">
+                        <span class="sanfang">第三方账号登录</span>
+                        <a href=""><img src="images/dl_06.png" class="m1"></a>
+                        <a href=""><img src="images/dl_08.png" class="m1"></a>
+                        <a href=""><img src="images/dl_10.png" class="m1"></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="foot_box" style="margin-top:0;">
+    <div class="foot">
+        <div class="foot_tel">
+            <h1>400-668-5668</h1>
+            <h2>客服热线（9:00-18:00）</h2>
+            <p>工作日：9:00-19:00<br>非工作日9:00-18:00</p>
+        </div>
+        <div class="foot_nav">
+            <ul>
+                <li><a href="">首页</a></li>
+                <li><a href="">寄件</a></li>
+                <li><a href="">商城</a></li>
+            </ul>
+            <ul>
+                <li><a href="">个人中心</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">商家入驻</a></li>
+            </ul>
+            <ul>
+
+                <li><a href="">配送员加盟</a></li>
+                <li><a href="">手机兔飕飕</a></li>
+            </ul>
+        </div>
+        <div class="foot_wei">
+            <div>
+                <p>配送端下载</p>
+                <img src="images/erwei.png">
+            </div>
+            <div>
+                <p>客户端下载</p>
+                <img src="images/erwei.png">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function (e) {
+        $(".passlog").hide().eq(0).show();
+        $(".log li").click(function () {
+            var index = $(this).index();
+            $(this).addClass("current").siblings().removeClass("current")
+            $(".passlog").hide().eq(index).show();
+        });
+        //60秒之后重新获取验证码
+        var num = 60;
+
+        function dao() {
+            num--
+            $("#huoqu").val("剩余" + num + "（s）").css({backgroundColor: "#f2f2f2", color: "#808080", height: 47})
+            if (num < 0) {
+                $("#huoqu").val("重新获取验证码")
+            }
+        }
+
+
+        $("#huoqu").click(function () {
+            timerhuo = setInterval(dao, 1000)
+
+        })
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.hrb.tusousou.dao.VarietyDao">
+    <resultMap id="VarietyMap" type="com.oracle.hrb.tusousou.pojo.Variety">
+        <id column="v_id" property="id"></id>
+        <result column="v_name" property="name"></result>
+        <result column="v_photo" property="photo"></result>
+        <result column="v_photo2" property="photo2"></result>
+    </resultMap>
+
+    <select id="findAll" resultMap="VarietyMap">
+        select * from variety
+    </select>
+    <select id="findById" resultMap="VarietyMap">
+        select * from variety where v_id = #{id}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link href="style/zhanshi.css" rel="stylesheet" type="text/css">
+<script src="js/jquery.js"></script>
+</head>
+
+<body>
+<div class="head">
+	<div class="logobox">
+		<a href="" class="logo"><img src=""></a>
+    	<a href="">哈尔滨</a>
+    </div>
+    <div class="nav">
+    	<ul>
+        	<li><a href="index.html" >首页</a></li>
+            <li><a href="login.html">加入我们</a></li>
+            <li><a href="sendorder.html">寄件</a></li>
+            <li><a href="shop.html">商城</a></li>
+            <li><a href="personaldata.html" >个人中心</a></li>
+            <li><a href="gywm.html">关于我们</a></li>
+            <li><a href="psy.html" class="current">配送员加盟</a></li>
+            <li><a href="lxwm.html" >联系我们</a></li>
+            <li><a href="xz.html" >手机兔飕飕</a></li>
+        </ul>
+    </div>
+</div>
+<div class="xiaz" style="height:684px;">
+	
+	<img src="images/psy_01.png" class="tou">
+   
+</div>
+<div class="jiameng">
+	<h1>职位描述</h1>
+    <p>
+    	福利待遇：<br>
+		1、薪资每年递增，有较多提拔机会。<br>
+		2、依法缴纳社会保险和住房公积金；<br>
+		3、提供系统的培训（新员工培训，岗位技能培训等）；<br>
+		4、公司按照经营状况发放忙季奖金、年终奖金；<br>
+
+    </p>
+    <img src="images/psy.png">
+</div>
+<div class="jiameng">
+	<h1>岗位职责</h1>
+    <p style="float:right;">
+    	
+		根据站长的安排对货品进行配送<br>
+		任职资格：<br>
+        1、能听懂普通话和会说普通话；<br>
+        2、身体健康，无传染性疾病，无不良嗜好；<br>
+        3、在黑龙江生活工作半年以上，会驾驶电瓶车，身体外观整洁；<br>
+        4、肯吃苦，服务意识<br>	
+工作时间：
+做六休一，节假日加班正常支付三倍加班费
+
+    </p>
+    <img src="images/psy2.png" style="float:left;">
+</div>
+<div class="jiameng">
+	<h1>加盟</h1>
+    <div class="jiajia">
+    <div class="er"><img src="images/2w.png"></div>
+    <p class="jia">
+    	
+		扫描二维码 下载配送端 注册加盟
+        <br>
+		
+
+    </p>
+    </div>
+    <img src="images/1234.png" class="jiam">
+</div>
+<div class="foot_box" style=" margin-top:200px;">
+	<div class="foot">
+    	<div class="foot_tel">
+        	<h1>198-4519-8752</h1>
+            <h2>客服热线（9:00-18:00）</h2>
+            <p>工作日：9:00-19:00<br>非工作日9:00-18:00</p>
+        </div>
+        <div class="foot_nav">
+        	<ul>
+            	<li><a href="">首页</a></li>
+                <li><a href="">寄件</a></li>
+                <li><a href="">商城</a></li>
+            </ul>
+            <ul>
+            	<li><a href="">个人中心</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">商家入驻</a></li>
+            </ul>
+            <ul>
+            	
+                <li><a href="">配送员加盟</a></li>
+                <li><a href="">手机兔飕飕</a></li>
+            </ul>
+        </div>
+        <div class="foot_wei">
+        	<div>
+            	<p>配送端下载</p>
+                <img src="images/erwei.png">
+            </div>
+            <div>
+            	<p>客户端下载</p>
+                <img src="images/erwei.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(e) {
+    $(".text").hide().eq(0).show();
+	$(".contentext li").mouseenter(function(){
+		var index=$(this).index();
+		 $(".text").hide().eq(index).show();
+		 $(this).addClass("current").siblings().removeClass("current")	
+	})
+
+	
+});
+</script>
+</body>
+</html>

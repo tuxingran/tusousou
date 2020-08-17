@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <link href="style/index2.css" type="text/css" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+    <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            var url = "order/findByUserId.do";
+            $.ajax({
+                url: url,
+                method: "POST",
+                success: function (result) {
+                    if (result.ok) {
+                        var orders = result.map['orders'];
+                        for (var i = 0; i < orders.length; i++) {
+                            var order = orders[i];
+                            $('#orders2').append('<li><a class="bianhao">' + order.num + '</a><span class="time">' + order.date + '<span class="yuan"></span></span> <h1>' + order.goods + '</h1><h2>￥' + order.price + '</h2><p>' + order.state + '</p><div class="box box5"><a onclick="jiedan(this)">立即接单</a><a onclick="delete_order(this)" class="a2">取消订单</a></div></li>');
+                            $("#orders2 li:last").data('order', order);
+
+                        }
+
+                    }
+
+                }
+
+
+            })
+
+        })
+
+        function jiedan(flag) {
+            var but = $(flag);
+            var id = but.parent().parent().data('order').id;
+            var url = "order/accept.do";
+            var data = "id=" + id;
+            if (confirm('你确定接单吗')) {
+                $.ajax({
+                    url: url,
+                    data: data,
+                    method: "POST",
+                    success: function (result) {
+                        if (result.ok) {
+                            $(flag).parent().prev().html('订单已完成');
+
+                        }
+
+                    }
+
+
+                })
+            }
+
+
+        }
+
+        function delete_order(flag) {
+
+            var but = $(flag);
+            var id = but.parent().parent().data('order').id;
+            var url = "order/delete.do";
+            var data = "id=" + id;
+            if (confirm('你确定删除吗')) {
+                $.ajax({
+                    url: url,
+                    data: data,
+                    method: "POST",
+                    success: function (result) {
+                        if (result.ok) {
+                            $(flag).parent().parent().remove();
+
+                        }
+
+                    }
+
+
+                })
+            }
+
+
+        }
+
+
+    </script>
+</head>
+
+<body>
+<div class="headbox">
+    <div class="head">
+        <div class="logobox">
+            <a href="" class="logo"><img src="images/logo.png"></a>
+            <select class="chengshi">
+                <option>哈尔滨</option>
+                <option>大连</option>
+                <option>佳木斯</option>
+            </select>
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="sendorder.html" class="current">寄件</a></li>
+                <li><a href="shop.html">商城</a></li>
+                <li><a href="personaldata.html">个人中心</a></li>
+                <li><a href="gywm.html">关于我们</a></li>
+                <li><a href="psy.html">配送员加盟</a></li>
+                <li><a href="lxwm.html">联系我们</a></li>
+                <li><a href="xz.html">手机兔飕飕</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="leftnav">
+        <ul>
+            <li><a onClick="window.location.href='sendorder.html'">在线下单</a></li>
+            <li><a onClick="window.location.href='sendorderprice.html'">价格表</a></li>
+            <li>
+                <a onClick="window.location.href='personaladdress.html'">地址簿</a>
+            </li>
+            <li><a onClick="window.location.href='sendorderaddress.html'" class="current">我的寄件</a></li>
+        </ul>
+    </div>
+    <div class="mybox">
+        <div class="my">
+            <div class="my_title">
+                <p class="p5">订单编号</p>
+                <p class="p1">下单时间</p>
+                <p class="p2">商品</p>
+                <p class="p3">支付</p>
+                <p class="p4">状态</p>
+            </div>
+            <ul id="orders2">
+                <li>
+                    <a class="bianhao">12345678901234567890123456789012</a>
+                    <span class="time">
+                    2018-10-04 08:27
+                    <span class="yuan"></span>
+                </span>
+
+                    <h1>食品饮料 规格[瓶]</h1>
+                    <h2>￥280.00</h2>
+                    <p>订单已完成</p>
+                    <div class="box box5">
+                        <a>立即接单</a>
+                        <a class="a2">取消订单</a>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="yema">
+
+            <a href="#">首页</a>
+            <a href="#">上一页</a>
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">下一页</a>
+            <a href="#">尾页</a>
+
+
+            <div class="clear"></div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="foot_box">
+    <h1 id="sas"></h1>
+    <div class="foot">
+        <div class="foot_tel">
+            <h1>198-4519-8752</h1>
+            <h2>客服热线（9:00-18:00）</h2>
+            <p>工作日：9:00-19:00<br>非工作日9:00-18:00</p>
+        </div>
+        <div class="foot_nav">
+            <ul>
+                <li><a href="">首页</a></li>
+                <li><a href="">寄件</a></li>
+                <li><a href="">商城</a></li>
+            </ul>
+            <ul>
+                <li><a href="">个人中心</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">商家入驻</a></li>
+            </ul>
+            <ul>
+
+                <li><a href="">配送员加盟</a></li>
+                <li><a href="">手机兔飕飕</a></li>
+            </ul>
+        </div>
+        <div class="foot_wei">
+            <div>
+                <p>配送端下载</p>
+                <img src="images/erwei.png">
+            </div>
+            <div>
+                <p>客户端下载</p>
+                <img src="images/erwei.png">
+            </div>
+            <div>
+                <p>微信公众号</p>
+                <img src="images/erwei.png">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var number = Number($("#num").val());
+        $("#jia").click(function () {
+            num++;
+            $("#num").val(num)
+        })
+    })
+</script>
+</body>
+</html>

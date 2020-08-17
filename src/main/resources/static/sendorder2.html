@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <link href="style/index2.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-1.8.2.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css"/>
+    <style>
+        .beizhu {
+            width: 400px;
+            height: 90px;
+            border: 1px solid #CCC;
+            resize: none;
+            margin-left: 25px;
+            margin-top: 30px;
+            padding: 1%
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+
+            var data = sessionStorage.getItem('data');
+            var price = sessionStorage.getItem('price');
+            $(function () {
+
+
+                $.ajax({
+
+                    url: "user/user.do",
+                    method: "POST",
+                    success: function (result) {
+                        if (result.ok) {
+                            var user = result.map['user'];
+                            $('#yue').html("余额 (￥" + user.money + ") 可支付");
+                            $('#zongjia').html("￥" + price);
+                            $('#price').html("￥" + (price - 30));
+                        }
+                    }
+                })
+            })
+
+
+        })
+
+        function zxc() {
+            var price = $('#price').html().substring(1);
+            $('#diyong').html("成功抵用￥" + $('#sousou').val() * 2);
+            $('#price').html("￥" + (sessionStorage.getItem('price') - 30 - $('#sousou').val() * 2));
+
+        }
+
+        function o_tijiao() {
+
+            var data = sessionStorage.getItem('data');
+            var price = $('#price').html().substring(1);
+            var sousou = $('#sousou').val();
+            data = data + "&finprice=" + price + "&sousou=" + sousou;
+            var url = "order/add.do";
+            $.ajax({
+                url:url,
+                data:data,
+                method:"POST",
+                success:function (result) {
+                    if(result.ok){
+                        location.href = "sendorderaddress.html";
+
+
+                    }
+
+                }
+
+
+            })
+
+
+        }
+    </script>
+</head>
+
+<body>
+<div class="headbox">
+    <div class="head">
+        <div class="logobox">
+            <a href="" class="logo"><img src=""></a>
+            <a href="">哈尔滨</a>
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="login.html">加入我们</a></li>
+                <li><a href="sendorder.html" class="current">寄件</a></li>
+                <li><a href="shop.html">商城</a></li>
+                <li><a href="personaldata.html">个人中心</a></li>
+                <li><a href="gywm.html">关于我们</a></li>
+                <li><a href="psy.html">配送员加盟</a></li>
+                <li><a href="lxwm.html">联系我们</a></li>
+                <li><a href="xz.html">手机兔飕飕</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="leftnav">
+        <ul>
+            <li><a onClick="window.location.href='sendorder.html'" class="current">在线下单</a></li>
+            <li><a onClick="window.location.href='sendorderprice.html'">价格表</a></li>
+            <li>
+                <a onClick="window.location.href='personaladdress.html'">地址簿</a>
+            </li>
+            <li><a onClick="window.location.href='sendorderaddress.html'">我的寄件</a></li>
+        </ul>
+    </div>
+    <div class="xdbox">
+        <div class="send">
+            <h1>付款方式</h1>
+            <ul>
+                <li class="sousou2">
+                    <a class="ss">飕飕币:一枚搜搜币可抵两元人民币</a>
+                    <input type="text" onblur="zxc()" id="sousou" class="zl zl2" value="1"><span id="diyong"
+                                                                                                 style="font-size:12px;">使用已抵￥1</span>
+                </li>
+                <li class="sousou">
+
+                    <a id="yue" class="ss"></a>
+                    <a class="dian"></a>
+                    <a class="dian2"></a>
+                </li>
+                <li class="sousou">
+                    <img src="images/ss__03.png">
+                    <a class="ss">微信支付</a>
+                    <a class="dian"></a>
+                    <a class="dian2"></a>
+                </li>
+                <li class="sousou">
+                    <img src="images/ss__06.png">
+                    <a class="ss">支付宝支付</a>
+                    <a class="dian"></a>
+                    <a class="dian2"></a>
+                </li>
+                <textarea class="beizhu" placeholder="请输入备注信息"></textarea>
+                <div class="tebox">
+
+                    <a class="te">直拿直送<span></span></a>
+                    <a class="te" id="teboxjia">加消费<span></span></a>
+                    <a class="te" style="border:none; width:auto;">
+                        <form>
+                            <select name="time" class="xuanze">
+                                <option selected value="now">立即送出</option>
+                                <option value="today">今天</option>
+                                <option value="tomorrow">明天</option>
+                            </select>
+                            <select name="time2" class="shijian">
+                                <option>时间1</option>
+                                <option>时间2</option>
+                                <option>时间3</option>
+                            </select>
+                        </form>
+                    </a>
+                </div>
+            </ul>
+            <div class="total">
+                <div>
+                    <span>总价：</span><a id="zongjia"></a>
+                </div>
+                <div>
+                    <span>优惠：</span><a>-￥30</a>
+                </div>
+                <div>
+                    <span>实际付款：</span><a id="price" class="da"></a>
+                </div>
+            </div>
+            <div class="button">
+                <a href="sendorder.html">上一步</a>
+                <a onclick="o_tijiao()" class="btn2">确认订单</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="foot_box">
+    <div class="foot">
+        <div class="foot_tel">
+            <h1>198-4519-8752</h1>
+            <h2>客服热线（9:00-18:00）</h2>
+            <p>工作日：9:00-19:00<br>非工作日9:00-18:00</p>
+        </div>
+        <div class="foot_nav">
+            <ul>
+                <li><a href="">首页</a></li>
+                <li><a href="">寄件</a></li>
+                <li><a href="">商城</a></li>
+            </ul>
+            <ul>
+                <li><a href="">个人中心</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">商家入驻</a></li>
+            </ul>
+            <ul>
+
+                <li><a href="">配送员加盟</a></li>
+                <li><a href="">手机兔飕飕</a></li>
+            </ul>
+        </div>
+        <div class="foot_wei">
+            <div>
+                <p>配送端下载</p>
+                <img src="images/erwei.png">
+            </div>
+            <div>
+                <p>客户端下载</p>
+                <img src="images/erwei.png">
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹窗-->
+<div class="pop3" id="tan">
+    <div class="poptitle">
+        <h1>加消费</h1>
+        <a class="close">×</a>
+    </div>
+    <div>
+        <label>人民币</label>
+        <input type="number" name="score" class="primary width" max="500" min="0">
+        <span>￥</span>
+    </div>
+    <div>
+        <label>飕飕币</label>
+        <input type="number" name="score" class="primary width" min="0">
+        <span>个</span>
+
+    </div>
+    <div><input type="submit" value="完成" class="baocun"></div>
+</div>
+<div class="pop-mask"></div>
+<script>
+    $(document).ready(function () {
+        //数量加减
+        var num = 0;
+        $("#add").click(function () {
+            num = parseInt($(this).siblings(".zl").val())
+            num++
+            $(this).siblings(".zl").val(num)
+        })
+        $("#min").click(function () {
+            num = parseInt($(this).siblings(".zl").val())
+            if (num > 0) {
+                num--
+            }
+
+            $(this).siblings(".zl").val(num)
+        })
+        //选择切换样式
+        $(".dian2").hide()
+        $(".sousou").click(function () {
+            $(".dian2").hide()
+            $(this).children(".dian2").show();
+            $(this).addClass("oncurrent").siblings("li").removeClass("oncurrent")
+        })
+        $(".tebox .te span").hide()
+        $(".tebox .te").toggle(function () {
+            $(this).addClass("current");
+            $(this).children("span").show();
+        }, function () {
+            $(this).removeClass("current");
+            $(this).children("span").hide();
+        })
+        //选择框
+        $(".shijian").hide()
+        $(".xuanze").click(function () {
+            var text = $(this).find("option:selected").text();
+            if (text == "立即送出") {
+                $(".shijian").hide()
+            } else {
+                $(".shijian").show()
+            }
+        })
+
+    })
+</script>
+</body>
+</html>

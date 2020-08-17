@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <link href="style/index2.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-1.8.2.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style/bootstrap.min.css"/>
+    <script>
+
+        $(function () {
+            var url = "variety/findAll.do";
+            $.ajax({
+
+                url: url,
+                success: function (result) {
+
+                    if (result) {
+                        var varieties = result.map['varieties'];
+                        for (var i = 0; i < varieties.length; i++) {
+                            var variety = varieties[i];
+                            $('#v_table').append('<dd><a href=""><img src="' + variety.photo + '"><span>' + variety.name + '</span></a></dd>')
+                            $('#sj_box_id').append('<div class="sj">\n' +
+                                '        <div class="sj_title">\n' +
+                                '            <a href="" class="zuo">' + i + 'F/<span>' + variety.name + '</span></a>\n' +
+                                '            <a href="" class="you">更多+</a>\n' +
+                                '        </div>\n' +
+                                '        <div class="lou">\n' +
+                                '            <div class="louimg"><a href=""><img src="' + variety.photo2 + '"></a></div>\n' +
+                                '            <ul id = "goods' + variety.id + '">\n' +
+                                '            </ul>\n' +
+                                '        </div>\n' +
+                                '    </div>');
+
+                            var id = variety.id;
+                            var url = "goods/findByVarietyId.do";
+                            var data = "id=" + id;
+                            $.ajax({
+                                url: url,
+                                data: data,
+                                method: "POST",
+                                success: function (result) {
+                                    var goods = result.map['goods'];
+                                    for (var i = 0; i < goods.length; i++) {
+                                        var good = goods[i];
+                                        $('#goods' + good.variety.id + '').append('<li><a href="shopdetails.html">\n' +
+                                            '                    <div><img src="' + good.photo + '"></div>\n' +
+                                            '                    <h1>' + good.name + '</h1>\n' +
+                                            '                    <p>' + good.introduce + '</p>\n' +
+                                            '                </a></li>')
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+        })
+
+    </script>
+</head>
+
+<body style=" background-color:#fff;">
+<div class="headbox">
+    <div class="head">
+        <div class="logobox">
+            <a href="" class="logo"><img src=""></a>
+            <a href="">哈尔滨</a>
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="login.html">加入我们</a></li>
+                <li><a href="sendorder.html">寄件</a></li>
+                <li><a href="shop.html" class="current">商城</a></li>
+                <li><a href="personaldata.html">个人中心</a></li>
+                <li><a href="gywm.html">关于我们</a></li>
+                <li><a href="psy.html">配送员加盟</a></li>
+                <li><a href="lxwm.html">联系我们</a></li>
+                <li><a href="xz.html">手机兔飕飕</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function (e) {
+        $(".imgbox").width($(".imgbox li").length * 1920);
+        /*鼠标进入圆点*/
+        $(".banner_box ol li").mouseenter(function () {
+            var index = $(this).index();
+            $(".banner_box ol li").eq(index).addClass("on").siblings().removeClass("on")
+            $(".imgbox").animate({marginLeft: -960 - 1920 * index}, 800);
+            num = index
+        })
+        /*自动轮播*/
+        var num = 0;
+
+        function bannerauto() {
+            num++;
+            if (num > $(".imgbox li").length - 1) {
+                num = 0
+            }
+            $(".imgbox").animate({marginLeft: -960 - 1920 * num}, 800);
+            $(".banner_box ol li").eq(num).addClass("on").siblings().removeClass("on")
+        }
+
+        /*停止定时器*/
+        timer = setInterval(bannerauto, 5000);
+        $(".banner_box").mouseenter(function () {
+            clearInterval(timer)
+        }).mouseleave(function () {
+            clearInterval(timer);
+            timer = setInterval(bannerauto, 5000);
+        })
+    });
+</script>
+<div class="banner_box">
+    <div class="imgbox">
+        <ul>
+            <li><a href=""><img src="images/banner.png"></a></li>
+            <li><a href=""><img src="images/banner.png"></a></li>
+            <li><a href=""><img src="images/banner.png"></a></li>
+            <li><a href=""><img src="images/banner.png"></a></li>
+            <li><a href=""><img src="images/banner.png"></a></li>
+        </ul>
+
+    </div>
+    <ol>
+        <li class="on"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
+    <div class="banner_nav">
+        <div class="caidan">
+            <h3>产品分类</h3>
+            <dl id="v_table">
+                <dd><a href=""><img src="images/d1.png"><span>食品美食</span></a></dd>
+            </dl>
+        </div>
+        <div class="shopsearch">
+            <ul>
+                <li><a href="shop.html" style="color:#ffa10f">商城首页<span>/</span></a></li>
+                <li><a href="shoplist.html">精选商家<span>/</span></a></li>
+                <li><a href="">我的收藏<span>/</span></a></li>
+            </ul>
+            <div class="shops">
+                <form>
+                    <input type="text" placeholder="搜索您需要的的商品" class="se"><input type="button" value="搜索" class="see">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="jingpin">
+    <ul>
+        <li>
+            <h2>精品推荐</h2>
+            <h3>Recommend</h3>
+            <div></div>
+        </li>
+        <li><a href=""><img src="images/sc_03.png"></a></li>
+        <li><a href=""><img src="images/sc_06.png"></a></li>
+        <li><a href=""><img src="images/sc_12.png"></a></li>
+        <li><a href=""><img src="images/sc_15.png"></a></li>
+        <li><a href=""><img src="images/sc_10.png"></a></li>
+    </ul>
+</div>
+<div class="sj_box" id="sj_box_id">
+    <h3>精选商家</h3>
+    <h4>Selected merchants</h4>
+</div>
+</div>
+<div class="foot_box" style="margin-top:0;">
+    <div class="foot">
+        <div class="foot_tel">
+            <h1>198-4519-8752</h1>
+            <h2>客服热线（9:00-18:00）</h2>
+            <p>工作日：9:00-19:00<br>非工作日9:00-18:00</p>
+        </div>
+        <div class="foot_nav">
+            <ul>
+                <li><a href="">首页</a></li>
+                <li><a href="">寄件</a></li>
+                <li><a href="">商城</a></li>
+            </ul>
+            <ul>
+                <li><a href="">个人中心</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">商家入驻</a></li>
+            </ul>
+            <ul>
+
+                <li><a href="">配送员加盟</a></li>
+                <li><a href="">手机兔飕飕</a></li>
+            </ul>
+        </div>
+        <div class="foot_wei">
+            <div>
+                <p>配送端下载</p>
+                <img src="images/erwei.png">
+            </div>
+            <div>
+                <p>客户端下载</p>
+                <img src="images/erwei.png">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的消息</title>
+    <link href="style/index.css" type="text/css" rel="stylesheet">
+
+    <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $.ajax({
+                url: "user/user.do",
+                method: "POST",
+                success: function (result) {
+                    if (result.ok) {
+                        var user = result.map['user'];
+                        $('.us_phone').html(user.phone);
+                    }
+                }
+            })
+
+        })
+
+    </script>
+</head>
+
+<body>
+<div class="head">
+    <div class="logobox">
+        <a href="" class="logo"><img src=""></a>
+        <a href="">哈尔滨</a>
+    </div>
+    <div class="nav">
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="login.html">加入我们</a></li>
+            <li><a href="sendorder.html">寄件</a></li>
+            <li><a href="shop.html">商城</a></li>
+            <li><a href="personaldata.html" class="current">个人中心</a></li>
+            <li><a href="gywm.html">关于我们</a></li>
+            <li><a href="psy.html">配送员加盟</a></li>
+            <li><a href="lxwm.html">联系我们</a></li>
+            <li><a href="xz.html">手机兔飕飕</a></li>
+        </ul>
+    </div>
+</div>
+<div class="person">
+    <div class="person-center">
+        <div class="person-image">
+            <div><img src="images/tx.png"></div>
+            <p class = "us_phone">182****7726</p>
+        </div>
+        <div class="person-text">
+            <div class="text1">
+                <p>基本信息</p>
+                <p class = "us_phone">182****7726</p>
+                <p>安全设置</p>
+            </div>
+            <div class="text2">
+                <div class="progressbox">
+                    <div class="progresstext">资料完成度<span id="total"></span></div>
+                    <div class="progress">
+                        <div id="bar" style="width:0%"></div>
+                    </div>
+                </div>
+                <a href="">我要完善</a>
+            </div>
+
+        </div>
+        <div class="person-yuan">
+            <ul>
+                <li><a href=""><img src="images/p4.png">
+                    <p>我的钱包</p></a></li>
+                <li><a href=""><img src="images/p5.png">
+                    <p>我的收藏</p></a></li>
+                <li><a href=""><img src="images/p6.png">
+                    <p>我的消息</p></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="leftnav">
+        <ul>
+            <li><a onClick="window.location.href='personaldata.html'">基本信息</a></li>
+            <li><a onClick="window.location.href='personalorder.html'">我的订单</a></li>
+            <li><a onClick="window.location.href='personalmoney.html'">我的钱包</a></li>
+            <li><a onClick="window.location.href='personaladdress.html'">地址管理</a></li>
+            <li><a onClick="window.location.href='personalservice.html'">我的客服</a></li>
+            <li><a onClick="window.location.href='personalcollect.html'">我的收藏</a></li>
+            <li><a onClick="window.location.href='personalyao.html'" class="current">邀请好友</a></li>
+            <li><a onClick="window.location.href='personalnews.html'">消息中心</a></li>
+            <li><a onClick="window.location.href='personalfap.html'">我的发票</a></li>
+            <li>
+                <a href="">我的店铺</a>
+                <div>
+                    <a href="">店铺设置</a>
+                    <a onClick="window.location.href='personalshop2.html'">商品管理</a>
+                    <a onClick="window.location.href='personalshop3.html'">订单管理</a>
+                </div>
+            </li>
+            <li><a href="">联系方式</a></li>
+        </ul>
+    </div>
+    <div class="yaobox">
+        <div class="yao1">
+            <h1 class="biao">还可以选择：<span>二维码图片下载到手机，发给好友扫描注册链接</span></h1>
+            <p>立即注册兔飕飕，免费领取飕飕币，快来加入吧<a href="http://localhost:8080/tusousou/registe.html">！http://localhost:8080/tusousou/registe.html</a>
+            </p>
+            <div id="copy">复制链接</div>
+        </div>
+        <div class="yaomiddle">
+            <div class="yao2">
+                <h1 class="biao">您可以选择：<span>复制您的专属邀请链接</span></h1>
+                <img src="images/yao_05_03.png" class="yaoqing1">
+                <div class="yaoqing2">
+                    <img src="images/erwei.png">
+                    <a>下载二维码</a>
+                </div>
+
+            </div>
+            <div class="yao2 yao3">
+                <h1 class="biao biao2">您可以选择：<br><span>邀请码告之好友，请好友在 APP 注册时</span></h1>
+                <img src="images/yao_05_06.png" class="yaoqing1">
+                <div class="yaoqing2">
+                    <form>
+                        <input type="text" class="in1"><br>
+                        <input type="button" value="复制" class="in2">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="foot_box" style="margin-top:0;">
+    <div class="foot">
+        <div class="foot_tel">
+            <h1>198-4519-8752</h1>
+            <h2>客服热线（9:00-18:00）</h2>
+            <p>工作日：9:00-19:00<br>非工作日9:00-18:00</p>
+        </div>
+        <div class="foot_nav">
+            <ul>
+                <li><a href="">首页</a></li>
+                <li><a href="">寄件</a></li>
+                <li><a href="">商城</a></li>
+            </ul>
+            <ul>
+                <li><a href="">个人中心</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">商家入驻</a></li>
+            </ul>
+            <ul>
+
+                <li><a href="">配送员加盟</a></li>
+                <li><a href="">手机兔飕飕</a></li>
+            </ul>
+        </div>
+        <div class="foot_wei">
+            <div>
+                <p>配送端下载</p>
+                <img src="images/erwei.png">
+            </div>
+            <div>
+                <p>客户端下载</p>
+                <img src="images/erwei.png">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //进度条
+    function run() {
+        var bar = document.getElementById("bar");
+        var total = document.getElementById("total");
+        bar.style.width = parseInt(bar.style.width) + 1 + "%";
+        total.innerHTML = bar.style.width;
+        if (bar.style.width == "70%") {
+            window.clearTimeout(timeout);
+            return;
+        }
+        var timeout = window.setTimeout("run()", 8);
+    }
+
+    window.onload = function () {
+        run();
+    }
+
+</script>
+</body>
+</html>

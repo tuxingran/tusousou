@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link href="style/zhanshi.css" rel="stylesheet" type="text/css">
+<script src="js/jquery.js"></script>
+</head>
+
+<body>
+<div class="head">
+	<div class="logobox">
+		<a href="" class="logo"><img src=""></a>
+    	<a href="">哈尔滨</a>
+    </div>
+    <div class="nav">
+    	<ul>
+        	<li><a href="index.html" >首页</a></li>
+            <li><a href="login.html">加入我们</a></li>
+            <li><a href="sendorder.html">寄件</a></li>
+            <li><a href="shop.html">商城</a></li>
+            <li><a href="personaldata.html" >个人中心</a></li>
+            <li><a href="gywm.html" class="current">关于我们</a></li>
+            <li><a href="psy.html">配送员加盟</a></li>
+            <li><a href="lxwm.html">联系我们</a></li>
+            <li><a href="xz.html">手机兔飕飕</a></li>
+        </ul>
+    </div>
+</div>
+<div class="gybanner2">
+	
+</div>
+<div class="gy_cont">
+	<div class="cb">
+    	<h1>ABOUT US</h1>
+        <p class="p1">公司介绍</p>
+        <div class="lx">
+        	<h3>联系我们</h3>
+            <div class="d1">
+            	<h5>咨询电话</h5>
+                <p>123456789</p>
+            </div>
+            <div class="d2">
+            	<h5>邮件咨询</h5>
+                <p>123456789</p>
+            </div>
+            <div class="d3">
+            	<a href="">在线客服</a>
+                
+            </div>
+        </div>
+    </div>
+    <div class="gy_text">
+    	<h2>飕飕网递是谁？</h2>
+<p>兔飕飕是煕然集团旗下软件公司自主研发的一款城市互动互助的一种应用系统 他提倡环保 安全 快捷的服务 为客户提供专人直送 限时 高效 无论客户在城市任何位置 需要递送任何物品（快递法规定内）都可以发起服务请求 只要客户在微信 APP 或者兔飕飕官网成功下单 系统就会把订单推送到客户周边最近的合作员手机上 合作员就近进行抢单 从取件到送达 全程由一名（唯一）合作员专门完成 送达时间在60分钟以内 将物品安全快速的送到收件人手中 避免了传统服务中的中转 分拣 配送 在安全 时效上大大提高了效率 在城市高速发展的今天 兔飕飕的服务还原了递送本质的诉求 把客户托付的物品安全 快捷的送达 规避了一件物品多人经手 出现问题无人负责的尴尬局面 客户可随时监看到合作员的位置 和物品流动情况 也可以直接致电服务人员询问 而且应用在智能手机上的终端也减少了客户信息泄露的风险</p>
+
+<h2>兔飕飕阳光服务</h2>
+<p>我们合作员将以饱满的热情来面对每一位客户 用我们周到的服务来得到您满意的微笑！</p>
+
+<h2>兔飕飕特色</h2>
+<p>多长时间没有和老朋友联系了？只要您心念一动 我们的合作员将会在第一时间去帮您把礼物和暖暖的问候送到他{她}的身边</p>
+    </div>
+</div>
+
+
+<div class="foot_box" style=" margin-top:180px;">
+	<div class="foot">
+    	<div class="foot_tel">
+        	<h1>400-668-5668</h1>
+            <h2>客服热线（9:00-18:00）</h2>
+            <p>工作日：9:00-19:00<br>非工作日9:00-18:00</p>
+        </div>
+        <div class="foot_nav">
+        	<ul>
+            	<li><a href="">首页</a></li>
+                <li><a href="">寄件</a></li>
+                <li><a href="">商城</a></li>
+            </ul>
+            <ul>
+            	<li><a href="">个人中心</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">商家入驻</a></li>
+            </ul>
+            <ul>
+            	
+                <li><a href="">配送员加盟</a></li>
+                <li><a href="">手机兔飕飕</a></li>
+            </ul>
+        </div>
+        <div class="foot_wei">
+        	<div>
+            	<p>配送端下载</p>
+                <img src="images/erwei.png">
+            </div>
+            <div>
+            	<p>客户端下载</p>
+                <img src="images/erwei.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(e) {
+    $(".text").hide().eq(0).show();
+	$(".contentext li").mouseenter(function(){
+		var index=$(this).index();
+		 $(".text").hide().eq(index).show();
+		 $(this).addClass("current").siblings().removeClass("current")	
+	})
+
+	
+});
+</script>
+</body>
+</html>

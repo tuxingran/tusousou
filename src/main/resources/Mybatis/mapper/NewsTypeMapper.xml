@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.hrb.tusousou.dao.NewsTypeDao">
+    <resultMap id="NewsTypeMap" type="com.oracle.hrb.tusousou.pojo.NewsType">
+        <id column="nt_id" property="id"></id>
+        <result column="nt_context" property="context2"></result>
+    </resultMap>
+
+    <select id="findAll" resultMap="NewsTypeMap">
+        select * from newsType
+    </select>
+    <select id="findById" resultMap="NewsTypeMap">
+        select * from newsType where nt_id = #{id}
+    </select>
+
+
+</mapper>
